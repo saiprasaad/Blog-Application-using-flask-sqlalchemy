@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+<div class="container flex-column d-flex justify-content-center align-items-center mt-5">
+    <p class="display-3">Welcome {{session['user']}}</p>
+    <p class="h1 mt-3">Posts</p>
+    <a class="btn btn-success" href="{{url_for('blog.create_post')}}">Create Post</a>
+    <div class="row mt-5 justify-content-center">
+        {% for post in posts %}
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <p>Posted By: {{post.user.username}}</p>
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="card-text">{{post.content}}</p>
+                    {% if post.user_id == session['user_id'] %}
+                    <a href="{{url_for('blog.edit_post', id=post.id)}}" class="card-link">Edit Post</a>
+                    <a href="{{url_for('blog.delete_post', id=post.id)}}" class="card-link" style="color: red;">Delete
+                        Post</a>
+                        <br />
+                    {% endif %}
+                    <form action="{{url_for('blog.add_comment', post_id=post.id)}}" method="POST" class="mt-4">
+                        <div class="input-group mb-3 mt-2">
+                            <input type="text" name="content" class="form-control" placeholder="Enter your comment" aria-describedby="button-addon2" required>
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Add Comment</button>
+                          </div>
+                        </form>
+                    <ul class="list-group">
+                        {% for comment in post.comments %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between"><p>Comment by {{comment.user.username}}: {{comment.content}}</p>
+                                {% if session['user_id'] == comment.user_id %}
+                                <a href="{{url_for('blog.delete_comment', id=comment.id)}}" style="color: red;">Delete Comment</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

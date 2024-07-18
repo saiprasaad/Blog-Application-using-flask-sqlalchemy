@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+
+{% block body %}
+<div class="container d-flex flex-column justify-content-center align-items-center">
+    <p class="p-5 display-4">Create Post</p>
+    <form method="POST" action="#">
+        <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input class="form-control" placeholder="Enter your title" name = 'title' type="text" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Content</label>
+            <input class="form-control" placeholder="Enter your content" name = 'content' type="text" />
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Create Post</button>
+        </div>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+          </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}

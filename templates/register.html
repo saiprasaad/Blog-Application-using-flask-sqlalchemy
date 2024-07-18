@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% include 'navbar.html' %}
+{% block body %}
+<div class="container d-flex flex-column justify-content-center align-items-center">
+    <p class="p-5 display-4">Register Page</p>
+    <form method="POST" action = "#">
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input class="form-control" placeholder="Enter your username" name = 'username' type="text" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input class="form-control" placeholder="Enter your password" name = 'password' type="password" />
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Register</button><br />
+            <a href="{{url_for('blog.login')}}">Existing user? Login</a>
+        </div>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+          </div>
+        {% endif %}
+    </form>
+</div>
+{% endblock %}
