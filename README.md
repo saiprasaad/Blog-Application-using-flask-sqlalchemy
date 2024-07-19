@@ -1,6 +1,6 @@
-# Flask Blog Application
+# Blog Application
 
-This is a simple blog application built using Flask, and SQLAlchemy. It allows users to register, log in, create, edit, and delete posts, and add comments to posts.
+This is a blog application built using Flask, and SQLAlchemy. It allows users to register, log in, create, edit, and delete posts, and add comments to posts.
 
 ## Features
 
